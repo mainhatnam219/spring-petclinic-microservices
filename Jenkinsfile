@@ -40,7 +40,7 @@ pipeline {
                     env.GENAI_SERVICE_CHANGED = "false"
                     
                     // For first build or when specifically requested, build everything
-                    if (params.FORCE_BUILD_ALL == true || currentBuild.number == 1) {
+                    if (currentBuild.number == 1) {
                         echo "Building all services (first build or forced build)"
                         env.CONFIG_SERVER_CHANGED = "true"
                         env.DISCOVERY_SERVER_CHANGED = "true"
@@ -58,7 +58,7 @@ pipeline {
                             // Get the previous successful build's commit
                             def previousCommit = ""
                             if (currentBuild.previousSuccessfulBuild) {
-                                previousCommit = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
+                                previousCommit = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT
                             } else {
                                 echo "No previous successful build found, comparing with previous commit"
                                 previousCommit = sh(script: "git rev-parse HEAD~1", returnStdout: true).trim()
