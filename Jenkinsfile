@@ -139,8 +139,6 @@ pipeline {
                                 }
                             } else {
                                 echo "No changes detected or git diff returned empty result"
-                                currentBuild.result = 'ABORTED'
-                                error("No changes detected to build")
                             }
                         } catch (Exception e) {
                             echo "Error detecting changes: ${e.message}"
