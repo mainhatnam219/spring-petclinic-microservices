@@ -33,6 +33,7 @@ public class Specialty {
 
     @Column(name = "name")
     private String name;
+    // check comment test jenkins
 
     public Integer getId() {
         return this.id;
